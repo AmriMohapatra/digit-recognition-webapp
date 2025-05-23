@@ -1,11 +1,13 @@
 # train_digit_classifier.py
 import tensorflow as tf
 from tensorflow.keras import layers, models
+from sklearn.model_selection import train_test_split
 
 # Load data
-mnist = tf.keras.datasets.mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-
+(x_train_full, y_train_full), _ = tf.keras.datasets.mnist.load_data()
+x_train, x_test, y_train, y_test = train_test_split(
+    x_train_full, y_train_full, test_size=0.2, random_state=42
+)
 # Normalize
 x_train = x_train / 255.0
 x_test = x_test / 255.0
